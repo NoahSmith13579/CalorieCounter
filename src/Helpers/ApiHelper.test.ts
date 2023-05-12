@@ -1,0 +1,52 @@
+/**
+ * @jest-environment node
+ */
+import { getFood } from "./ApiHelper";
+import fetch from "jest-fetch-mock";
+
+describe("testing api", () => {
+  beforeEach(() => {
+    fetch.resetMocks();
+  });
+
+  test("gets food", async () => {
+    const data = {
+      content: {
+        items: [
+          {
+            name: "onion",
+            calories: 44.7,
+            serving_size_g: 100,
+            fat_total_g: 0.2,
+            fat_saturated_g: 0,
+            protein_g: 1.4,
+            sodium_mg: 2,
+            potassium_mg: 35,
+            cholesterol_mg: 0,
+            carbohydrates_total_g: 10.1,
+            fiber_g: 1.4,
+            sugar_g: 4.7,
+          },
+          {
+            name: "tomato",
+            calories: 18.2,
+            serving_size_g: 100,
+            fat_total_g: 0.2,
+            fat_saturated_g: 0,
+            protein_g: 0.9,
+            sodium_mg: 4,
+            potassium_mg: 23,
+            cholesterol_mg: 0,
+            carbohydrates_total_g: 3.9,
+            fiber_g: 1.2,
+            sugar_g: 2.6,
+          },
+        ],
+      },
+    };
+    fetch.mockResponseOnce(JSON.stringify(data.content.items));
+    const response = await getFood("onion and tomato");
+
+    expect(response).toStrictEqual(data.content.items);
+  });
+});
