@@ -1,25 +1,21 @@
+import React, { useEffect } from "react";
 import SearchBox from "../../src/Components/SearchBox/SearchBox";
 import data from "../fixtures/data.json";
+import useLocalStorage from "../../src/Handlers/LocalStorageHandler";
+
+//This is tested in E2E
 describe("SearchBox", () => {
-  const currentMeal = data.items.map((a) => {
-    return { ...a };
+  beforeEach(() => {
+    window.localStorage.setItem("food", JSON.stringify(data.items));
   });
 
   it("renders", () => {
-    cy.mount(<SearchBox />);
+    cy.mount(<SearchBox onClick={setLocalStorage} />);
   });
 
-  it("invokes function on submit", () => {
-    const callback = cy.stub();
-    cy.mount(<SearchBox />);
-    const button = cy.get("[data-cy=searchBoxButton]");
-    button.click().then(() => {
-      expect(callback).to.have.been.calledOnce();
-      expect(callback).to.have.been.calledWithExactly();
-    });
-  });
-
-  it("changes localStorage on input", () => {
-    cy.mount(<SearchBox />);
+  it("changes localStorage on input confirm", () => {
+    cy.mount(<SearchBox onClick={setLocalStorage} />);
+    const input = cy.get("[data.cy=searchBoxInput]");
+    input.type("tomato");
   });
 });

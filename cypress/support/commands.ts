@@ -38,6 +38,7 @@
 
 // React 18
 import { mount } from "cypress/react18";
+import "@testing-library/cypress/add-commands";
 
 Cypress.Commands.add("mount", (component, options) => {
   // Wrap any parent components needed

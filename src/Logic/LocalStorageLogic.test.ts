@@ -1,12 +1,13 @@
 import {
   checkStorageForDupes,
-  updateServingSize,
   sumNutValues,
+  convertToNutProgress,
 } from "./LocalStorageLogic";
 import dupeData from "../../cypress/fixtures/dupe.json";
 import data from "../../cypress/fixtures/data.json";
 import doubledData from "../../cypress/fixtures/doubledSSdata.json";
 import nutValueSum from "../../cypress/fixtures/nutValueSum.json";
+import dataProgressPercent from "../../cypress/fixtures/dataProgressPercent.json";
 
 describe("performs all checks", () => {
   beforeEach(() => {});
@@ -18,15 +19,6 @@ describe("performs all checks", () => {
 
     expect(fixedItems).toStrictEqual(doubledDataItems);
   });
-  test("updates ServingSize as needed", () => {
-    let items = data.items.map((a) => {
-      return { ...a };
-    });
-    let doubledItems = [...doubledData.items];
-    expect(items).not.toBe(doubledItems);
-    const updatedItems = updateServingSize(items, "onion", 200);
-    expect(updatedItems).toBe(items);
-  });
   test("sums store's values", () => {
     let items = data.items.map((a) => {
       return { ...a };
@@ -35,10 +27,18 @@ describe("performs all checks", () => {
     const sum = sumNutValues(items);
     expect(sum).toStrictEqual(nutValueSum);
   });
+  test("gives percents from data", () => {
+    let items = data.items.map((a) => {
+      return { ...a };
+    });
+    const progessPercent = convertToNutProgress(items);
+    expect(progessPercent).toStrictEqual(dataProgressPercent);
+  });
   test("returns back the same data if no dupes", () => {
-    let errorlessData = data;
-    //FIXME const it and check that
-    checkStorageForDupes(errorlessData.items);
-    expect(errorlessData).toBe(data);
+    let errorlessData = data.items.map((a) => {
+      return { ...a };
+    });
+    const checkedData = checkStorageForDupes(errorlessData);
+    expect(checkedData).toBe(errorlessData);
   });
 });

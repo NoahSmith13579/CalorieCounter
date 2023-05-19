@@ -6,5 +6,17 @@
     // to avoid clashing with Jest types
     "types": ["cypress"]
   },
-  "include": ["../node_modules/cypress", "./**/*.ts"]
+  "include": [
+    "../node_modules/cypress",
+    "./**/*.tsx",
+    "cypress/integration/FoodGrid.cy.tsx",
+    "cypress/integration/CalorieCounterBox.cy.tsx",
+    "cypress/integration/NutritionCard.cy.tsx",
+    "cypress/integration/Layout.cy.tsx",
+    "cypress/integration/ProgressBar.cy.tsx",
+    "cypress/integration/SearchBox.cy.tsx",
+    "../cypress.d.ts",
+    "calorie-counter/cypress.config.ts",
+    "cypress.d.ts"
+  ]
 }

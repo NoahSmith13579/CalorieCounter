@@ -18,16 +18,7 @@
     "jsx": "react-jsx"
   },
   "baseurl": "./",
-  "include": [
-    "src",
-    "cypress.d.ts",
-    "cypress/integration/FoodGrid.cy.tsx",
-    "cypress/integration/CalorieCounterBox.cy.tsx",
-    "cypress/integration/NutritionCard.cy.tsx",
-    "cypress/integration/Layout.cy.tsx",
-    "cypress/integration/ProgressBar.cy.tsx",
-    "cypress/integration/SearchBox.cy.tsx"
-  ],
+  "include": ["src"],
   "paths": {
     "@/*": ["src/*"]
   }

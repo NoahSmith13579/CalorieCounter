@@ -1,18 +1,7 @@
 import NutritionFacts from "../Entities/NutritionFacts";
-
-type NutFactNumbers = {
-  calories: number;
-  fat_total_g: number;
-  fat_saturated_g: number;
-  serving_size_g: number;
-  protein_g: number;
-  sodium_mg: number;
-  potassium_mg: number;
-  cholesterol_mg: number;
-  carbohydrates_total_g: number;
-  fiber_g: number;
-  sugar_g: number;
-};
+import DailyValues from "../Data/DailyValues.json";
+import NutFactNumbers from "../Entities/NutFactNumbers";
+import NutFactPercent from "../Entities/NutFactPercent";
 
 function checkStorageForDupes(store: NutritionFacts[]) {
   let storeNameArr = store.map((item) => {
@@ -67,31 +56,6 @@ function checkStorageForDupes(store: NutritionFacts[]) {
   return store;
 }
 
-function updateServingSize(
-  store: NutritionFacts[],
-  name: string,
-  newValue: number
-) {
-  let changedStore = store.reduce(function (prev, cur) {
-    if (cur.name === name) {
-      prev = cur;
-    }
-    return prev;
-  });
-  const servingSizeMult = changedStore.serving_size_g / newValue;
-
-  for (let prop in changedStore) {
-    if (prop !== "name" && prop !== "serving_size_g") {
-      changedStore[prop as keyof NutFactNumbers] =
-        changedStore[prop as keyof NutFactNumbers] * servingSizeMult;
-    } else if (prop === "serving_size_g") {
-      changedStore[prop as keyof NutFactNumbers] = newValue;
-    }
-  }
-
-  return store;
-}
-
 function sumNutValues(store: NutritionFacts[]): NutFactNumbers {
   let summation: NutFactNumbers = store
     .map(({ name, ...numbers }) => numbers as NutFactNumbers)
@@ -102,11 +66,28 @@ function sumNutValues(store: NutritionFacts[]): NutFactNumbers {
           Math.round((cur[proptype] + Number.EPSILON) * 100) / 100;
         acc[proptype] = +acc[proptype].toFixed(2);
       }
-
       return acc;
     });
 
   return summation;
 }
 
-export { checkStorageForDupes, updateServingSize, sumNutValues };
+function convertToNutProgress(store: NutritionFacts[]): NutFactPercent {
+  let progressAmounts = {} as NutFactPercent;
+
+  let sum = sumNutValues(store);
+  for (const prop in sum) {
+    if (prop !== "serving_size_g") {
+      var proptype = prop as keyof NutFactPercent;
+      progressAmounts[proptype] =
+        (sum[prop as keyof NutFactNumbers] /
+          DailyValues.dailyValues[proptype]) *
+        100;
+      progressAmounts[proptype] = +progressAmounts[proptype].toFixed(2);
+    }
+  }
+  console.log("Progress Amounts: ", progressAmounts);
+  return progressAmounts;
+}
+
+export { checkStorageForDupes, sumNutValues, convertToNutProgress };

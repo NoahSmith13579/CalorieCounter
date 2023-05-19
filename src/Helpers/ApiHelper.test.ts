@@ -44,7 +44,7 @@ describe("testing api", () => {
         ],
       },
     };
-    fetch.mockResponseOnce(JSON.stringify(data.content.items));
+    fetch.mockResponseOnce(JSON.stringify(data));
     const response = await getFood("onion and tomato");
 
     expect(response).toStrictEqual(data.content.items);

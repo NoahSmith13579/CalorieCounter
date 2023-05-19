@@ -6,13 +6,15 @@ interface ProgressBarProps {
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ color, progress }) => {
+  progress = Math.min(progress, 100);
+  const fillerStyle = { width: `${progress}%`, backgroundColor: color };
+  console.log("Progress: ", progress);
   return (
     <div className="progress-container">
-      <div
-        className="progress-filler"
-        style={{ width: `${progress}%`, backgroundColor: color }}
-      >
-        <span className="progress-label">{progress}%</span>
+      <div className="progress-filler" style={fillerStyle}>
+        <span className="progress-label">
+          {progress > 1 ? `${progress}%` : ""}
+        </span>
       </div>
     </div>
   );
