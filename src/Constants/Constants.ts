@@ -12,7 +12,7 @@ let nutritionOrder = {
 
 const displayedPropName = {
   calories: "Calories",
-  serving_size_g: "Serving Size",
+  serving_size_g: "Serving Size (g)",
   fat_total_g: "Total Fat (g)",
   fat_saturated_g: "Saturated Fat (g)",
   protein_g: "Protein (g)",
@@ -30,7 +30,7 @@ const colorArray = {
   fat_total_g: "yellow",
   fat_saturated_g: "goldenrod",
   protein_g: "indianred",
-  sodium_mg: "gainsboro",
+  sodium_mg: "lightsteelblue",
   potassium_mg: "purple",
   cholesterol_mg: "khaki",
   carbohydrates_total_g: "lightslategrey",

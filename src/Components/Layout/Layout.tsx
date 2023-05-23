@@ -8,6 +8,7 @@ import { checkStorageForDupes } from "../../Logic/LocalStorageLogic";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { capitalizeFirstLetter } from "../../Util/Util";
+import About from "../About/About";
 
 const Layout: React.FC = () => {
   const [localStorage, setLocalStorage] = useLocalStorage(
@@ -41,11 +42,12 @@ const Layout: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="bg-gray-400">
+      <About />
       <CalorieCounterBox meal={localStorage} />
       <SearchBox onClick={handleAddFood} />
       <FoodGrid meal={localStorage} onClick={handleRemoveFood} />
-      <ToastContainer />
+      <ToastContainer autoClose={3000} />
     </div>
   );
 };

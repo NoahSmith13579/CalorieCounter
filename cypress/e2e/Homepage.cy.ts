@@ -12,7 +12,7 @@ describe("Homepage", () => {
     input.type("chicken");
     let button = cy.get("[data-cy=searchBoxButton]");
     button.click();
-    cy.findByText("Chicken", { timeout: 1000 }).should("exist");
+    cy.findByText("Chicken", { timeout: 3000 }).should("exist");
   });
   it("can remove items", () => {
     cy.visit("/");

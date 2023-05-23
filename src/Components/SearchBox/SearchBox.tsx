@@ -12,6 +12,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onClick }) => {
   ) => {
     e.preventDefault();
     const inputFoodData = await getFood(inputValue);
+    console.log("resp from getFood2: ", inputFoodData);
     onClick(inputFoodData);
     setInputValue("");
   };
@@ -37,6 +38,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onClick }) => {
             handleOnClick(e);
           }}
           className="border-2 rounded-xl bg-blue-500 hover:bg-blue-300 px-1"
+          disabled={inputValue !== "" ? false : true}
         >
           Search
         </button>

@@ -11,7 +11,13 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ color, progress }) => {
   console.log("Progress: ", progress);
   return (
     <div className="progress-container">
-      <div className="progress-filler" style={fillerStyle}>
+      <div
+        className="progress-filler"
+        style={fillerStyle}
+        data-cy={"progress-filler"}
+        data-backgroundColor={fillerStyle.backgroundColor}
+        data-width={fillerStyle.width}
+      >
         <span className="progress-label">
           {progress > 1 ? `${progress}%` : ""}
         </span>

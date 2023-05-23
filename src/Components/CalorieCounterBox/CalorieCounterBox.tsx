@@ -31,26 +31,29 @@ const CalorieCounterBox: React.FC<CalorieCounterBoxProps> = ({ meal }) => {
   nutritionPercent = Object.assign(nutOrderCopy, nutritionPercent);
   console.log("Percent array: ", nutritionPercent);
   return (
-    <div>
+    <div className="p-4 m-2 bg-gray-200 border rounded-xl shadow-lg">
       <div>
-        <span>Serving Size(g): {mealTotals.serving_size_g ?? 0}</span>
+        <span className="font-bold">Daily Values</span>
+        <hr className="border-black border-t-2" />
       </div>
+      <div className="py-1">
+        <span className="underline">Serving Size(g)</span>
+        <span className="font-bold">: {mealTotals.serving_size_g ?? 0}</span>
+      </div>
+
       {Object.keys(nutritionPercent).map((prop) => {
         let propKeyOf = prop as keyof NutFactPercent;
-        console.log(
-          "NutritionPercent prop value: ",
-          nutritionPercent[propKeyOf]
-        );
         return (
-          <>
-            <span>
-              {displayedPropName[propKeyOf]}: {mealTotals[propKeyOf] ?? 0}
-            </span>
-            <ProgressBar
-              color={colorArray[propKeyOf]}
-              progress={nutritionPercent[propKeyOf] ?? 0}
-            />
-          </>
+          <div className="">
+            <span className="underline">{displayedPropName[propKeyOf]}:</span>
+            <span className="font-bold"> {mealTotals[propKeyOf] ?? 0}</span>
+            <div className="py-1">
+              <ProgressBar
+                color={colorArray[propKeyOf]}
+                progress={nutritionPercent[propKeyOf] ?? 0}
+              />
+            </div>
+          </div>
         );
       })}
     </div>
