@@ -4,8 +4,16 @@ interface ExternalApiResponse<T> {
   content: { items: T };
 }
 
+/**
+ * Fetches data from api
+ * @param query input food name and serving size information
+ * @returns
+ */
 const getFood = async (query: string): Promise<NutritionFacts[]> => {
   const encodedQuery = encodeURIComponent(query);
+  if (encodedQuery.length >= 1500) {
+    return [] as NutritionFacts[];
+  }
   const params: RequestInit = {
     mode: "cors",
     headers: {

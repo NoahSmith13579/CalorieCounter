@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import FoodGrid from "../FoodGrid/FoodGrid";
 import SearchBox from "../SearchBox/SearchBox";
 import CalorieCounterBox from "../CalorieCounterBox/CalorieCounterBox";
@@ -10,17 +10,22 @@ import "react-toastify/dist/ReactToastify.css";
 import { capitalizeFirstLetter } from "../../Util/Util";
 import About from "../About/About";
 
+/**
+ * Container for all displayed components
+ * @returns
+ */
 const Layout: React.FC = () => {
   const [localStorage, setLocalStorage] = useLocalStorage(
     "food",
     [] as NutritionFacts[]
   );
-  useEffect(() => {
-    console.log("Storage: ", localStorage);
-  }, [localStorage]);
 
+  /**
+   * Adds the input food items to the localStorage
+   * @param newFood The input food
+   * @returns
+   */
   const handleAddFood = (newFood: NutritionFacts[]) => {
-    console.log("newFood: ", newFood);
     if (newFood.length === 0) {
       toast("Input food not recognized", { type: "error" });
       return;
@@ -28,9 +33,12 @@ const Layout: React.FC = () => {
     let newStorage = checkStorageForDupes([...localStorage, ...newFood]);
     setLocalStorage(newStorage);
     toast("Food Added", { type: "success" });
-    console.log("Storage after add: ", localStorage);
   };
 
+  /**
+   * Removes the food item from the localStorage
+   * @param removedItemName
+   */
   const handleRemoveFood = (removedItemName: string) => {
     const newStorage = localStorage.filter(
       (item) => item.name !== removedItemName
@@ -42,7 +50,7 @@ const Layout: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-400">
+    <div className="bg-gray-600">
       <About />
       <CalorieCounterBox meal={localStorage} />
       <SearchBox onClick={handleAddFood} />

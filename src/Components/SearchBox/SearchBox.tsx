@@ -7,15 +7,22 @@ interface SearchBoxProps {
 }
 const SearchBox: React.FC<SearchBoxProps> = ({ onClick }) => {
   const [inputValue, setInputValue] = useState("");
+  /**
+   * Passes the input food item to the parent component's function
+   * @param e React.ChangeEvent<HTMLInputElement>
+   */
   const handleOnClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
     const inputFoodData = await getFood(inputValue);
-    console.log("resp from getFood2: ", inputFoodData);
     onClick(inputFoodData);
     setInputValue("");
   };
+  /**
+   * Changes the input value
+   * @param e React.ChangeEvent<HTMLInputElement>
+   */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };

@@ -1,7 +1,11 @@
 import React from "react";
-import { useState, useEffect } from "react";
 
-// Hook
+/**
+ * Custom hook that gets/sets info from the localStorage
+ * @param key Key to access in localStorage
+ * @param initialValue Value to use if key is empty
+ * @returns
+ */
 function useLocalStorage<T>(key: string, initialValue: T) {
   // State to store our value
   // Pass initial state function to useState so logic is only executed once

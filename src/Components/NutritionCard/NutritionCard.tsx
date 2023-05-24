@@ -7,14 +7,22 @@ interface NutritionCardProps {
   nutritionFacts: NutritionFacts;
 }
 
+/**
+ * Displays information about the food item
+ * @param {NutritionFacts} nutritionFacts information about the food item
+ * @returns
+ */
 const NutritionCard: React.FC<NutritionCardProps> = ({ nutritionFacts }) => {
   return (
     <div data-cy={nutritionFacts.name} className="w-fit">
+      {
+        // Map through each property and creates a div containing info for each
+      }
       {Object.keys(nutritionFacts).map((prop) => {
         let propKeyOf = prop as keyof NutritionFacts;
         if (propKeyOf !== "name") {
           return (
-            <div>
+            <div key={prop}>
               <span className="">
                 {displayedPropName[prop as keyof NutFactPercent]}:
               </span>
@@ -26,7 +34,7 @@ const NutritionCard: React.FC<NutritionCardProps> = ({ nutritionFacts }) => {
           );
         } else {
           return (
-            <div>
+            <div key={prop}>
               <span data-cy="name" className="font-bold underline">
                 {capitalizeFirstLetter(nutritionFacts[propKeyOf])}
               </span>

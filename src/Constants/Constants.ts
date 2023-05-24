@@ -31,7 +31,7 @@ const colorArray = {
   fat_saturated_g: "goldenrod",
   protein_g: "indianred",
   sodium_mg: "lightsteelblue",
-  potassium_mg: "purple",
+  potassium_mg: "magenta",
   cholesterol_mg: "khaki",
   carbohydrates_total_g: "lightslategrey",
   fiber_g: "oldlace",

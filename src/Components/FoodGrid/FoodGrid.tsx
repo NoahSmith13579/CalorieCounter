@@ -7,19 +7,32 @@ interface FoodGridProps {
   onClick: (removedItemName: string) => void;
 }
 
+/**
+ * Grid that displays and contains NutritionCards
+ * @param meal NutritionFacts array
+ * @param onClick Layout's handleRemoveFood
+ * @returns
+ */
 const FoodGrid: React.FC<FoodGridProps> = ({ meal, onClick }) => {
+  /**
+   * Passes the clicked food's name to the parent function
+   * @param foodName Clicked food's name
+   */
   const handleOnClick = (foodName: string) => {
     onClick(foodName);
   };
 
   return (
-    // Use two different ternary to avoid wrong styling on the "EmptyGrid"
+    // Use two different ternary to avoid incorrect styling on the "EmptyGrid"
     <>
       <div className="inline-grid  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
         {meal.length >= 1
           ? meal.map((food) => (
-              <div className="border m-3 p-3 w-fit shadow-sm bg-gray-200">
-                <NutritionCard key={food.name} nutritionFacts={food} />
+              <div
+                className="border m-3 p-3 w-fit shadow-sm bg-gray-200"
+                key={food.name}
+              >
+                <NutritionCard nutritionFacts={food} />
                 <button
                   data-cy={`${food.name}Button`}
                   onClick={() => handleOnClick(food.name)}

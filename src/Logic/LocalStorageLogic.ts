@@ -3,6 +3,11 @@ import DailyValues from "../Data/DailyValues.json";
 import NutFactNumbers from "../Entities/NutFactNumbers";
 import NutFactPercent from "../Entities/NutFactPercent";
 
+/**
+ * Removes any duplicate food items from the data in the local storage
+ * @param store data from localStorage
+ * @returns
+ */
 function checkStorageForDupes(store: NutritionFacts[]) {
   let storeNameArr = store.map((item) => {
     return item.name;
@@ -12,8 +17,10 @@ function checkStorageForDupes(store: NutritionFacts[]) {
   });
 
   if (AreDupesStored) {
-    var acc: NutritionFacts[];
-
+    // for each unique item in the store
+    // create an key-value pair with the item's name being the key
+    // add the item's values to the kvp's values
+    // effectively adds any duplicate data together and removes the duplicate
     store = [
       ...store
         .reduce((prev, cur) => {
@@ -51,11 +58,15 @@ function checkStorageForDupes(store: NutritionFacts[]) {
         }, new Map())
         .values(),
     ];
-    //console.log(store);
   }
   return store;
 }
 
+/**
+ * Sums the nutritional values for all items
+ * @param store data from localStorage
+ * @returns
+ */
 function sumNutValues(store: NutritionFacts[]): NutFactNumbers {
   let summation: NutFactNumbers = store
     .map(({ name, ...numbers }) => numbers as NutFactNumbers)
@@ -72,6 +83,11 @@ function sumNutValues(store: NutritionFacts[]): NutFactNumbers {
   return summation;
 }
 
+/**
+ * Converts the store to an array of percents of daily values
+ * @param store
+ * @returns
+ */
 function convertToNutProgress(store: NutritionFacts[]): NutFactPercent {
   let progressAmounts = {} as NutFactPercent;
 
@@ -86,7 +102,6 @@ function convertToNutProgress(store: NutritionFacts[]): NutFactPercent {
       progressAmounts[proptype] = +progressAmounts[proptype].toFixed(2);
     }
   }
-  console.log("Progress Amounts: ", progressAmounts);
   return progressAmounts;
 }
 
