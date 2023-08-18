@@ -28,7 +28,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onClick }) => {
   };
 
   return (
-    <div className="m-1">
+    <section className="m-1">
       <form>
         <input
           data-cy="searchBoxInput"
@@ -50,7 +50,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onClick }) => {
           Search
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 

@@ -14,7 +14,7 @@ interface NutritionCardProps {
  */
 const NutritionCard: React.FC<NutritionCardProps> = ({ nutritionFacts }) => {
   return (
-    <div data-cy={nutritionFacts.name} className="w-fit">
+    <article data-cy={nutritionFacts.name} className="w-fit">
       {
         // Map through each property and creates a div containing info for each
       }
@@ -22,7 +22,7 @@ const NutritionCard: React.FC<NutritionCardProps> = ({ nutritionFacts }) => {
         let propKeyOf = prop as keyof NutritionFacts;
         if (propKeyOf !== "name") {
           return (
-            <div key={prop}>
+            <section key={prop}>
               <span className="">
                 {displayedPropName[prop as keyof NutFactPercent]}:
               </span>
@@ -30,19 +30,19 @@ const NutritionCard: React.FC<NutritionCardProps> = ({ nutritionFacts }) => {
                 {" "}
                 {nutritionFacts[propKeyOf]}
               </span>
-            </div>
+            </section>
           );
         } else {
           return (
-            <div key={prop}>
+            <section key={prop}>
               <span data-cy="name" className="font-bold underline">
                 {capitalizeFirstLetter(nutritionFacts[propKeyOf])}
               </span>
-            </div>
+            </section>
           );
         }
       })}
-    </div>
+    </article>
   );
 };
 

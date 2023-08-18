@@ -50,13 +50,13 @@ const Layout: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-600">
+    <main className="App dark bg-gray-600">
       <About />
       <CalorieCounterBox meal={localStorage} />
       <SearchBox onClick={handleAddFood} />
       <FoodGrid meal={localStorage} onClick={handleRemoveFood} />
       <ToastContainer autoClose={3000} />
-    </div>
+    </main>
   );
 };
 

@@ -25,10 +25,10 @@ const FoodGrid: React.FC<FoodGridProps> = ({ meal, onClick }) => {
   return (
     // Use two different ternary to avoid incorrect styling on the "EmptyGrid"
     <>
-      <div className="inline-grid  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+      <article className="inline-grid  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
         {meal.length >= 1
           ? meal.map((food) => (
-              <div
+              <section
                 className="border m-3 p-3 w-fit shadow-sm bg-gray-200"
                 key={food.name}
               >
@@ -40,17 +40,17 @@ const FoodGrid: React.FC<FoodGridProps> = ({ meal, onClick }) => {
                 >
                   Remove {food.name}?
                 </button>
-              </div>
+              </section>
             ))
           : ""}
-      </div>
+      </article>
       {meal.length < 1 ? (
-        <div data-cy="emptyGrid" className="p-6">
+        <article data-cy="emptyGrid" className="p-6">
           <span className="p-3 text-white">
             You have not added any food to your meal yet. Enter something into
             the field above to start counting calories!
           </span>
-        </div>
+        </article>
       ) : (
         ""
       )}
